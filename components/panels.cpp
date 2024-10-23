@@ -1,14 +1,44 @@
 #include "../raylib/src/raylib.h"
 #include "panels.h"
 
+#define ButtonS 2 // button shadow
+
 void Button::Render() {
-    DrawRectangle(x, y, w, h, GRAY);
-    int midX = x+w/2;
-    int midY = y+h/2;
-    int wordLen = MeasureText(txt.c_str(), fontSize);
-    DrawText(txt.c_str(), midX-wordLen/2, midY-fontSize/2, fontSize, BLACK);
+    if (pressed) {
+        DrawRectangle(x, y, w, ButtonS, BLACK);
+        DrawRectangle(x, y + ButtonS, w, h - ButtonS, GRAY);
+        int midX = x+w/2;
+        int midY = y+h/2;
+        int wordLen = MeasureText(txt.c_str(), fontSize);
+        DrawText(txt.c_str(), midX-wordLen/2, midY-fontSize/2 + ButtonS, fontSize, BLACK);
+    } else {
+        DrawRectangle(x, y, w, h, GRAY);
+        int midX = x+w/2;
+        int midY = y+h/2;
+        int wordLen = MeasureText(txt.c_str(), fontSize);
+        DrawText(txt.c_str(), midX-wordLen/2, midY-fontSize/2, fontSize, BLACK);
+    }
 }
 
-void Button::TogglePress() {
-    
+bool Button::DetectPress(Vector2 mouse, bool mousePressed) {
+    bool xCol = mouse.x > x && mouse.x < x + w;
+    bool yCol = mouse.y > y && mouse.y < y + h;
+    if (!mousePressed && pressed && xCol && yCol) { // actual press (let go of button)
+        this->pressed = false;
+        return true;
+    }
+    if (mousePressed && !pressed && xCol && yCol) { // toggle pressed
+        this->pressed = true;
+    }
+    return false;
+}
+
+void ButtonContainer::AddButton(Button b) {
+    this->buttons.push_back(b);
+}
+
+void ButtonContainer::Render() {
+    for (Button b : buttons) {
+        
+    }
 }

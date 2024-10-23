@@ -28,6 +28,10 @@ bool Button::DetectPress(Vector2 mouse, bool mousePressed) {
         this->pressed = false;
         return true;
     }
+    if (!mousePressed && pressed) {
+        this->pressed = false;
+        return false;
+    }
     if (mousePressed && !pressed && xCol && yCol) { // toggle pressed
         this->pressed = true;
     }

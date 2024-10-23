@@ -8,3 +8,7 @@ void Button::Render() {
     int wordLen = MeasureText(txt.c_str(), fontSize);
     DrawText(txt.c_str(), midX-wordLen/2, midY-fontSize/2, fontSize, BLACK);
 }
+
+void Button::TogglePress() {
+    
+}

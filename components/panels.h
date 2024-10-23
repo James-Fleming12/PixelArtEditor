@@ -33,7 +33,7 @@ class ButtonContainer {
                     orientation(orientation), padding(padding) {}
     void Add(Button b);
     void Render();
-    bool DetectPress(Vector2 mousepos, bool mousePressed);
+    std::string DetectPress(Vector2 mousepos, bool mousePressed);
 };
 
 #endif

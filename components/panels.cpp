@@ -1,4 +1,5 @@
 #include "../raylib/src/raylib.h"
+#include <string>
 #include "panels.h"
 
 #define ButtonS 2 // button shadow
@@ -59,11 +60,11 @@ void ButtonContainer::Render() {
     }
 }
 
-bool ButtonContainer::DetectPress(Vector2 mpos, bool mp) {
-    bool res = false;
+std::string ButtonContainer::DetectPress(Vector2 mpos, bool mp) {
+    std::string res = "";
     for (Button& b : this->buttons) {
         if (b.DetectPress(mpos, mp)) {
-            res = true;
+            res = b.txt;
         }
     }
     return res;

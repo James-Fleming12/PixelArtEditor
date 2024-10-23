@@ -6,16 +6,20 @@
 
 int main(void) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pixel Art Editor");
-    
-    Button test = Button(30, 30, 50, 20, "Hello", 16);
     bool pressed = false;
 
+    Button test = Button(0, 0, 50, 20, "Hello", 16);
+    Button test2 = Button(0, 0, 50, 20, "World", 16);
+    ButtonContainer hotbar = ButtonContainer(0, 0, SCREEN_WIDTH, 30, 1, 5);
+    hotbar.Add(test);
+    hotbar.Add(test2);
+
     while(!WindowShouldClose()) {
-        pressed = test.DetectPress(GetMousePosition(), IsMouseButtonDown(0));
+        pressed = hotbar.DetectPress(GetMousePosition(), IsMouseButtonDown(0));
 
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            test.Render();
+            hotbar.Render();
         EndDrawing();
     }
 

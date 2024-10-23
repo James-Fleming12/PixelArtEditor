@@ -5,7 +5,7 @@
 
 void Button::Render() {
     if (pressed) {
-        DrawRectangle(x, y, w, ButtonS, BLACK);
+        DrawRectangle(x, y, w, ButtonS, DARKGRAY);
         DrawRectangle(x, y + ButtonS, w, h - ButtonS, GRAY);
         int midX = x+w/2;
         int midY = y+h/2;
@@ -33,12 +33,38 @@ bool Button::DetectPress(Vector2 mouse, bool mousePressed) {
     return false;
 }
 
-void ButtonContainer::AddButton(Button b) {
+void ButtonContainer::Add(Button b) { // buttons need to be initialized (coordinates don't matter)
+    int total = padding;
+    for (Button& i : buttons) {
+        if (orientation == 1) { // horizontal
+            total += i.w + padding;
+        } else if (orientation == 2) { // vertical
+            total += i.h + padding;
+        }
+    }
+    if (orientation == 1) {
+        b.x = total;
+        b.y = this->y + padding;
+    } else if (orientation == 2) {
+        b.x = this->x + padding;
+        b.y = total;
+    }
     this->buttons.push_back(b);
 }
 
 void ButtonContainer::Render() {
+    DrawRectangle(x, y, w, h, LIGHTGRAY);
     for (Button b : buttons) {
-        
+        b.Render();
     }
+}
+
+bool ButtonContainer::DetectPress(Vector2 mpos, bool mp) {
+    bool res = false;
+    for (Button& b : this->buttons) {
+        if (b.DetectPress(mpos, mp)) {
+            res = true;
+        }
+    }
+    return res;
 }

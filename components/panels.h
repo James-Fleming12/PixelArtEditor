@@ -26,10 +26,14 @@ class ButtonContainer {
     int y;
     int w;
     int h;
+    int orientation; // 1 for horizontal, 2 for vertical
+    int padding;
     std::vector<Button> buttons;
-    ButtonContainer(int x, int y, int w, int h) : x(x),y(y),w(w),h(h) {}
-    void AddButton(Button b);
+    ButtonContainer(int x, int y, int w, int h, int orientation, int padding) : x(x),y(y),w(w),h(h), 
+                    orientation(orientation), padding(padding) {}
+    void Add(Button b);
     void Render();
+    bool DetectPress(Vector2 mousepos, bool mousePressed);
 };
 
 #endif

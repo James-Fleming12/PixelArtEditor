@@ -7,8 +7,10 @@ Ran with ...
 ## ToDo:
 - [x] Simple UI (Buttons, Menu bar, etc.)
 - [ ] Simple Editor
-    - [ ] Placing Pixels (custom grid sizes)
-    - [ ] Moveable Camera (zoom, pan, location, etc)
+    - [x] Placing Pixels (custom grid sizes)
+    - [ ] Moveable Camera (zoom, pan, location, etc.)
+        - [x] Zoom
+        - [ ] Location
 - [ ] File Saves
     - [ ] Basic File Save (unoptimized)
     - [ ] File Encoding (using ...)

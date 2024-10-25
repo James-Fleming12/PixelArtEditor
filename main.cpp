@@ -33,7 +33,7 @@ int main(void) {
             }
             pressed = "";
         }
-        
+
         currentScroll = GetMouseWheelMove();
         if (currentScroll != 0) {
             v.zoom += currentScroll;

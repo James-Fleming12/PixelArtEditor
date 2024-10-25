@@ -22,7 +22,7 @@ class Button{
 
 class ButtonContainer {
     public:
-    int x; 
+    int x;
     int y;
     int w;
     int h;

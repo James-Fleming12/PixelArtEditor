@@ -1,6 +1,6 @@
 #include "../raylib/src/raylib.h"
-#include <string>
 #include "panels.h"
+#include <string>
 
 #define ButtonS 2 // button shadow
 

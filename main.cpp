@@ -1,6 +1,7 @@
 #include "raylib/src/raylib.h"
 #include "components/panels.h"
 #include "components/editor.h"
+#include <iostream>
 #include <string>
 
 #define SCREEN_WIDTH 800
@@ -13,6 +14,8 @@ int main(void) {
     bool HelloToggle = false; // for testing
     bool WorldToggle = false; // for testing
 
+    Vector2 mpos;
+
     Button test = Button(0, 0, 50, 20, "Hello", 16);
     Button test2 = Button(0, 0, 50, 20, "World", 16);
     ButtonContainer hotbar = ButtonContainer(0, 0, SCREEN_WIDTH, 30, 1, 5);
@@ -23,7 +26,17 @@ int main(void) {
     View v = View();
 
     while(!WindowShouldClose()) {
-        pressed = hotbar.DetectPress(GetMousePosition(), IsMouseButtonDown(0));
+        currentScroll = GetMouseWheelMove();
+        if (currentScroll != 0) {
+            v.zoom += currentScroll;
+        }
+        if (IsMouseButtonDown(1)) {
+            v.offset.x += mpos.x-GetMousePosition().x;
+            v.offset.y += mpos.y-GetMousePosition().y;
+        }
+        mpos = GetMousePosition();
+
+        pressed = hotbar.DetectPress(mpos, IsMouseButtonDown(0));
         if (pressed != "") { // which button is pressed (based off of text within button)
             if (pressed == "Hello") {
                 HelloToggle = !HelloToggle;
@@ -33,18 +46,10 @@ int main(void) {
             }
             pressed = "";
         }
-
-        currentScroll = GetMouseWheelMove();
-        if (currentScroll != 0) {
-            v.zoom += currentScroll;
-        }
-
         BeginDrawing();
             ClearBackground(RAYWHITE);
             grid.Render(v);
-            if (grid.HandleMouse(GetMousePosition(), IsMouseButtonDown(0), v)) {
-                
-            }
+            grid.HandleMouse(mpos, IsMouseButtonDown(0), v); // will also place pixel
             hotbar.Render();
             if (HelloToggle) { DrawText("Hello", 10, 35, 10, WHITE); }
             if (WorldToggle) { DrawText("World", 40, 35, 10, WHITE); }

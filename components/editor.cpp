@@ -1,4 +1,5 @@
 #include "editor.h"
+#include <iostream>
 
 View::View() {
     offset = {0, 0};
@@ -37,12 +38,17 @@ void ColorGrid::Render(View v) {
 }
 
 bool ColorGrid::HandleMouse(Vector2 pos, bool pressed, View v) {
-    int xIndex = pos.x/v.zoom-v.offset.x;
-    int yIndex = pos.y/v.zoom-v.offset.y;
+    int xIndex = (pos.x+v.offset.x)/v.zoom;
+    int yIndex = (pos.y+v.offset.y)/v.zoom;
     if (pressed) {
+        PlacePixel({float(xIndex), float(yIndex)}, {0, 0, 0, 255});
         return true;
     }
     DrawRectangleLines(xIndex*v.zoom-v.offset.x, yIndex*v.zoom-v.offset.y, 
-                        v.zoom, v.zoom, BLACK);
+                       v.zoom, v.zoom, BLACK);
     return false;
+}
+
+void ColorGrid::PlacePixel(Vector2 pos, RGB color) {
+    this->grid[int(pos.y)][int(pos.x)] = color;
 }

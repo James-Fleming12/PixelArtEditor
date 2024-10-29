@@ -1,7 +1,6 @@
 #include "raylib/src/raylib.h"
 #include "components/panels.h"
 #include "components/editor.h"
-#include <iostream>
 #include <string>
 
 #define SCREEN_WIDTH 800

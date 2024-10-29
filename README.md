@@ -8,9 +8,10 @@ Ran with ...
 - [x] Simple UI (Buttons, Menu bar, etc.)
 - [ ] Simple Editor
     - [x] Placing Pixels (custom grid sizes)
-    - [ ] Moveable Camera (zoom, pan, location, etc.)
+    - [x] Moveable Camera (zoom, pan, location, etc.)
         - [x] Zoom
-        - [ ] Location
+        - [x] Location
+    - [ ] Bresenham's for line placements
 - [ ] File Saves
     - [ ] Basic File Save (unoptimized)
     - [ ] File Encoding (using ...)

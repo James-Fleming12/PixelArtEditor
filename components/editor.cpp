@@ -1,5 +1,4 @@
 #include "editor.h"
-#include <iostream>
 
 View::View() {
     offset = {0, 0};

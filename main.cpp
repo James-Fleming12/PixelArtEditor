@@ -35,6 +35,9 @@ int main(void) {
             v.offset.y += mpos.y-GetMousePosition().y;
         }
         mpos = GetMousePosition();
+        if (IsMouseButtonDown(0)) {
+            grid.PlacePixel({(mpos.x+v.offset.x)/v.zoom, (mpos.y+v.offset.y)/v.zoom}, {0, 0, 0, 255});
+        }
 
         pressed = hotbar.DetectPress(mpos, IsMouseButtonDown(0));
         if (pressed != "") { // which button is pressed (based off of text within button)
@@ -49,9 +52,7 @@ int main(void) {
         BeginDrawing();
             ClearBackground(RAYWHITE);
             grid.Render(v);
-            if (grid.HandleMouse(mpos, IsMouseButtonDown(0), v)) {
-                grid.PlacePixel({(mpos.x+v.offset.x)/v.zoom, (mpos.y+v.offset.y)/v.zoom}, {0, 0, 0, 255});
-            }
+            grid.HandleMouse(mpos, v);
             hotbar.Render();
             if (HelloToggle) { DrawText("Hello", 10, 35, 10, WHITE); }
             if (WorldToggle) { DrawText("World", 40, 35, 10, WHITE); }

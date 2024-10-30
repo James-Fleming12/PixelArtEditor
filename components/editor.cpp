@@ -36,15 +36,11 @@ void ColorGrid::Render(View v) {
     }
 }
 
-bool ColorGrid::HandleMouse(Vector2 pos, bool pressed, View v) {
+void ColorGrid::HandleMouse(Vector2 pos, View v) {
     int xIndex = (pos.x+v.offset.x)/v.zoom;
     int yIndex = (pos.y+v.offset.y)/v.zoom;
-    if (pressed) {
-        return true;
-    }
     DrawRectangleLines(xIndex*v.zoom-v.offset.x, yIndex*v.zoom-v.offset.y, 
                        v.zoom, v.zoom, BLACK);
-    return false;
 }
 
 void ColorGrid::PlacePixel(Vector2 pos, RGB color) {

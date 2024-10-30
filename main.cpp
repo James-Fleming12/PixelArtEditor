@@ -13,7 +13,8 @@ int main(void) {
     bool HelloToggle = false; // for testing
     bool WorldToggle = false; // for testing
 
-    Vector2 mpos;
+    Vector2 mpos = {0,0};
+    Vector2 oldPos = {0,0};
 
     Button test = Button(0, 0, 50, 20, "Hello", 16);
     Button test2 = Button(0, 0, 50, 20, "World", 16);
@@ -48,7 +49,9 @@ int main(void) {
         BeginDrawing();
             ClearBackground(RAYWHITE);
             grid.Render(v);
-            grid.HandleMouse(mpos, IsMouseButtonDown(0), v); // will also place pixel
+            if (grid.HandleMouse(mpos, IsMouseButtonDown(0), v)) {
+                grid.PlacePixel({(mpos.x+v.offset.x)/v.zoom, (mpos.y+v.offset.y)/v.zoom}, {0, 0, 0, 255});
+            }
             hotbar.Render();
             if (HelloToggle) { DrawText("Hello", 10, 35, 10, WHITE); }
             if (WorldToggle) { DrawText("World", 40, 35, 10, WHITE); }

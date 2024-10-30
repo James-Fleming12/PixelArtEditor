@@ -40,7 +40,6 @@ bool ColorGrid::HandleMouse(Vector2 pos, bool pressed, View v) {
     int xIndex = (pos.x+v.offset.x)/v.zoom;
     int yIndex = (pos.y+v.offset.y)/v.zoom;
     if (pressed) {
-        PlacePixel({float(xIndex), float(yIndex)}, {0, 0, 0, 255});
         return true;
     }
     DrawRectangleLines(xIndex*v.zoom-v.offset.x, yIndex*v.zoom-v.offset.y, 

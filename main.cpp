@@ -36,7 +36,7 @@ int main(void) {
         }
         mpos = GetMousePosition();
         if (IsMouseButtonDown(0)) {
-            grid.PlaceLine(mpos, oldPos, {0, 0, 0, 255});
+            grid.PlaceLine(mpos, oldPos, {0, 0, 0, 255}, v);
         }
 
         pressed = hotbar.DetectPress(mpos, IsMouseButtonDown(0));

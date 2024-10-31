@@ -29,8 +29,8 @@ class ColorGrid {
     ~ColorGrid();
     void Render(View v);
     void HandleMouse(Vector2 pos, View v);
-    void PlacePixel(Vector2 pos, RGB color);
-    void PlaceLine(Vector2 pos, Vector2 oldpos, RGB color);
+    void PlacePixel(int posy, int posx, RGB color);
+    void PlaceLine(Vector2 pos, Vector2 oldpos, RGB color, View v);
 };
 
 #endif 

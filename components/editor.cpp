@@ -46,3 +46,7 @@ void ColorGrid::HandleMouse(Vector2 pos, View v) {
 void ColorGrid::PlacePixel(Vector2 pos, RGB color) {
     this->grid[int(pos.y)][int(pos.x)] = color;
 }
+
+void ColorGrid::PlaceLine(Vector2 pos, Vector2 pos2, RGB color) {
+    
+}

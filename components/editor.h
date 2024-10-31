@@ -30,6 +30,7 @@ class ColorGrid {
     void Render(View v);
     void HandleMouse(Vector2 pos, View v);
     void PlacePixel(Vector2 pos, RGB color);
+    void PlaceLine(Vector2 pos, Vector2 oldpos, RGB color);
 };
 
 #endif 

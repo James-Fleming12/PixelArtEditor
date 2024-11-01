@@ -29,6 +29,9 @@ int main(void) {
         currentScroll = GetMouseWheelMove();
         if (currentScroll != 0) {
             v.zoom += currentScroll;
+            if (v.zoom < 1) {
+                v.zoom = 1;
+            }
         }
         if (IsMouseButtonDown(1)) {
             v.offset.x += mpos.x-GetMousePosition().x;

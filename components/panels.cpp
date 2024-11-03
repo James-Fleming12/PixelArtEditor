@@ -48,11 +48,11 @@ void ButtonContainer::Add(Button b) { // buttons need to be initialized (coordin
         }
     }
     if (orientation == 1) {
-        b.x = total;
+        b.x = this->x + total;
         b.y = this->y + padding;
     } else if (orientation == 2) {
         b.x = this->x + padding;
-        b.y = total;
+        b.y = this->y + total;
     }
     this->buttons.push_back(b);
 }

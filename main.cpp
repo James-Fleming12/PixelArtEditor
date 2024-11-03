@@ -10,17 +10,19 @@ int main(void) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pixel Art Editor");
     std::string pressed = "";
     float currentScroll;
-    bool HelloToggle = false; // for testing
-    bool WorldToggle = false; // for testing
 
     Vector2 mpos = {0,0};
     Vector2 oldPos = {0,0};
 
     Button test = Button(0, 0, 50, 20, "Hello", 16);
     Button test2 = Button(0, 0, 50, 20, "World", 16);
+    Button main = Button(0, 0, 50, 20, "Menu", 16);
     ButtonContainer hotbar = ButtonContainer(0, 0, SCREEN_WIDTH, 30, 1, 5);
-    hotbar.Add(test); 
-    hotbar.Add(test2);
+    ButtonContainer mainDrop = ButtonContainer(5, 35, 60, 200, 2, 5);
+    hotbar.Add(main); 
+    mainDrop.Add(test);
+    mainDrop.Add(test2);
+    mainDrop.render = false;
 
     ColorGrid grid = ColorGrid(SCREEN_WIDTH, SCREEN_HEIGHT);
     View v = View();
@@ -39,26 +41,27 @@ int main(void) {
         }
         mpos = GetMousePosition();
         if (IsMouseButtonDown(0)) {
-            grid.PlaceLine(mpos, oldPos, {0, 0, 0, 255}, v);
+            grid.PlacePixel((mpos.x+v.offset.x)/v.zoom, (mpos.y+v.offset.y)/v.zoom, {0, 0, 0, 255});
         }
 
         pressed = hotbar.DetectPress(mpos, IsMouseButtonDown(0));
         if (pressed != "") { // which button is pressed (based off of text within button)
-            if (pressed == "Hello") {
-                HelloToggle = !HelloToggle;
-            }
-            if (pressed == "World") {
-                WorldToggle = !WorldToggle;
+            if (pressed == "Menu") {
+                mainDrop.render = !mainDrop.render;
             }
             pressed = "";
+        }
+        if (mainDrop.render) {
+            pressed = mainDrop.DetectPress(mpos, IsMouseButtonDown(0));
         }
         BeginDrawing();
             ClearBackground(RAYWHITE);
             grid.Render(v);
             grid.HandleMouse(mpos, v);
             hotbar.Render();
-            if (HelloToggle) { DrawText("Hello", 10, 35, 10, WHITE); }
-            if (WorldToggle) { DrawText("World", 40, 35, 10, WHITE); }
+            if (mainDrop.render) { 
+                mainDrop.Render(); 
+            }
         EndDrawing();
     }
 
